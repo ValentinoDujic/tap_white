@@ -242,6 +242,9 @@
                 const pct = parseInt(c.dataset.tip);
                 c.querySelector('.amt').textContent = (basePrice * pct / 100).toFixed(2) + '€';
             });
+            
+            // Set initial state
+            updatePrice(15);
 
             function updatePrice(tipPct) {
                 currentTip = tipPct;
