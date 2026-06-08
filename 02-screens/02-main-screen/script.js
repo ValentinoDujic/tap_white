@@ -1,14 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
     // ---- Add to cart animation feedback ----
     const addButtons = document.querySelectorAll('.grid-add-btn');
-    const cartCountEl = document.querySelector('.cart-count');
-    const cartPriceEl = document.querySelector('.cart-fab span:last-child');
-    let items = 4;
-    let total = 11.20;
 
-    const prices = [1.80, 2.00, 3.00, 3.50]; // match grid items
-
-    addButtons.forEach((btn, index) => {
+    addButtons.forEach((btn) => {
         btn.addEventListener('click', (e) => {
             e.stopPropagation();
             
@@ -27,22 +21,35 @@ document.addEventListener('DOMContentLoaded', () => {
                 btn.textContent = '+';
             }, 800);
 
-            // Update cart count & price
-            items++;
-            total += prices[index] || 2.00;
-            cartCountEl.textContent = `${items} stavke`;
+            // Add to Cart
+            const gridItem = btn.closest('.grid-item');
+            const titleEl = gridItem.querySelector('h3');
+            const priceEl = gridItem.querySelector('.price');
+            
+            const id = titleEl.getAttribute('data-i18n');
+            const price = parseFloat(priceEl.textContent.replace('€', ''));
+
+            Cart.addItem({
+                id: id,
+                nameKey: id,
+                price: price,
+                qty: 1,
+                modifiers: []
+            });
             
             // Pulse the FAB
             const fab = document.querySelector('.cart-fab');
-            fab.style.transform = 'scale(1.03)';
-            fab.style.boxShadow = '0 10px 35px rgba(239, 105, 30, 0.6)';
-            setTimeout(() => {
-                fab.style.transform = '';
-                fab.style.boxShadow = '';
-            }, 300);
+            if (fab) {
+                fab.style.transform = 'scale(1.03)';
+                fab.style.boxShadow = '0 10px 35px rgba(239, 105, 30, 0.6)';
+                setTimeout(() => {
+                    fab.style.transform = '';
+                    fab.style.boxShadow = '';
+                }, 300);
+            }
 
             // Show toast
-            showToast(`Dodano u košaricu!`);
+            showToast('Dodano u košaricu!');
         });
     });
 
