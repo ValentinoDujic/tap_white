@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Taplito - Naplata</title>
+    <!-- Global Design System -->
+    <link rel="stylesheet" href="../../global.css">
+    <!-- Component Specific Styles -->
+    <link rel="stylesheet" href="style.css">
+    <script src="../../translations.js"></script>
+    <script src="../../cart.js"></script>
+</head>
+<body>
+
+    <!-- Ambient Background Blobs -->
+    <div class="ambient-bg">
+        <div class="ambient-blob ambient-blob-1"></div>
+        <div class="ambient-blob ambient-blob-2"></div>
+    </div>
+    <div class="cyber-grid"></div>
+
+    <header class="page-header">
+        <a href="../04-summary-screen/index.html" class="back-btn" aria-label="Natrag">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        </a>
+        <h1 data-i18n="checkout_title">Naplata</h1>
+        <!-- Language Selector -->
+        <div class="lang-selector" style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%);">
+            <span class="lang-pill active" data-lang="hr">HR</span>
+            <span class="lang-pill" data-lang="en">EN</span>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Order Summary -->
+        <section id="checkoutSummaryList">
+            <span class="section-label" data-i18n="order_summary">Sažetak narudžbe</span>
+            <!-- Dynamically populated -->
+        </section>
+
+        <!-- Tip Selection -->
+        <section>
+            <span class="section-label" data-i18n="tip_question">Želite li uključiti napojnicu?</span>
+            <div class="tip-grid">
+                <div class="tip-card" data-tip="10">
+                    <span class="pct">10%</span>
+                    <span class="amt">1.50€</span>
+                </div>
+                <div class="tip-card active" data-tip="15">
+                    <span class="pct">15%</span>
+                    <span class="amt">2.25€</span>
+                </div>
+                <div class="tip-card" data-tip="20">
+                    <span class="pct">20%</span>
+                    <span class="amt">3.00€</span>
+                </div>
+            </div>
+            <a href="#" class="no-tip" id="noTipBtn" data-i18n="no_tip">Bez napojnice</a>
+        </section>
+
+        <!-- Totals Box -->
+        <div class="totals-box">
+            <div class="total-line">
+                <span data-i18n="order_amt">Iznos narudžbe</span>
+                <span id="checkoutBaseTotal">0.00€</span>
+            </div>
+            <div class="total-line">
+                <span data-i18n="tip_amt">Napojnica</span>
+                <span id="tipDisplay">2.25€</span>
+            </div>
+            <div class="total-line total-main">
+                <span data-i18n="total">Ukupno</span>
+                <span class="price" id="totalDisplay">17.25€</span>
+            </div>
+            <p style="font-size: 11px; color: var(--text-muted); margin-top: 10px; text-align: center;" data-i18n="taxes_inc">
+                Uključujući sve poreze i naknade
+            </p>
+        </div>
+
+        <!-- Payment Methods -->
+        <section>
+            <span class="section-label" data-i18n="pay_methods">Načini plaćanja</span>
+            <div class="payment-tabs">
+                <div class="pay-tab active" data-tab="card" data-i18n="pay_card">Kartica</div>
+                <div class="pay-tab" data-tab="gpay">Google Pay</div>
+            </div>
+            
+            <!-- Card View -->
+            <div id="cardContent" class="payment-content active">
+                <div class="card-logos">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/b/b7/MasterCard_Logo.svg" alt="Mastercard" style="height: 20px;">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa" style="height: 15px;">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/c/cb/Maestro_logo.svg" alt="Maestro" style="height: 20px;">
+                </div>
+                <p style="text-align: center; font-size: 13px; color: var(--text-muted); margin-bottom: 30px;" data-i18n="card_desc">
+                    Unos kartice bit će zatražen u sljedećem koraku (Monri)
+                </p>
+            </div>
+
+            <!-- GPay View -->
+            <div id="gpayContent" class="payment-content">
+                <div style="background: white; color: black; border-radius: 8px; height: 48px; display: flex; align-items: center; justify-content: center; font-weight: 700; margin-bottom: 30px;">
+                    GOOGLE PAY
+                </div>
+            </div>
+        </section>
+
+        <!-- Email Input -->
+        <section class="input-group">
+            <span class="section-label" data-i18n="email_label">E-mail *</span>
+            <input type="email" id="emailInput" data-i18n="email_ph" placeholder="vasa@email.adresa">
+            <p class="input-caption" data-i18n="email_desc">Potrebno za slanje potvrde o plaćanju</p>
+        </section>
+
+        <!-- Legal -->
+        <section class="checkbox-group">
+            <label class="checkbox-item">
+                <input type="checkbox" class="legal-check">
+                <span data-i18n="legal_1">Slažem se s <a href="#">politikom privatnosti</a> i pristajem na obradu mojih podataka.</span>
+            </label>
+            <label class="checkbox-item">
+                <input type="checkbox" class="legal-check">
+                <span data-i18n="legal_2">Prihvaćam <a href="#">uvjete i odredbe</a> koji reguliraju ovo naručivanje.</span>
+            </label>
+        </section>
+
+        <!-- Merchant Info -->
+        <section class="merchant-info">
+            <span class="section-label" style="text-align: center;" data-i18n="merchant_info">Podaci o trgovcu</span>
+            <div class="merchant-grid">
+                <div data-i18n="merchant_name">Naziv:</div> <div style="color: var(--text-main);">THE BULLORDS j.d.o.o.</div>
+                <div data-i18n="merchant_vat">OIB:</div> <div style="color: var(--text-main);">14334083740</div>
+                <div data-i18n="merchant_address">Adresa:</div> <div style="color: var(--text-main);">Jakovlje, Hrvatska</div>
+            </div>
+            <div class="monri-logo">
+                <span style="font-size: 10px;" data-i18n="secure_pay">Sigurno plaćanje omogućuje</span>
+                <div style="font-weight: 800; color: var(--text-main); letter-spacing: 1px;">MONRI</div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer with Slide to Pay -->
+    <footer class="checkout-footer">
+        <div class="slide-pay-container" id="slidePayContainer" style="opacity: 0.5; pointer-events: none;">
+            <div class="slide-pay-bg" id="slidePayBg">
+                <div class="slide-pay-handle" id="slidePayHandle">➔</div>
+            </div>
+            <span class="slide-pay-text" id="slidePayText"><span data-i18n="slide_to_pay">Povuci za plaćanje</span> · 17.25€</span>
+        </div>
+    </footer>
+
+    <!-- Floating Waiter Button (HIDDEN) -->
+    <!--
+    <button class="waiter-fab" id="waiterBtn" aria-label="Pozovi konobara">🛎️</button>
+    -->
+
+    <!-- Waiter Bottom Sheet (HIDDEN) -->
+    <!--
+    <div class="bottom-sheet-overlay" id="waiterOverlay"></div>
+    <div class="bottom-sheet" id="waiterSheet">
+        <div class="bottom-sheet-handle"></div>
+        <h2 data-i18n="waiter_title">🛎️ Usluga za stolom</h2>
+        <p data-i18n="waiter_desc">Odaberite što trebate i konobar stiže za Vaš stol (Stol 12).</p>
+        <div class="waiter-options">
+            <div class="waiter-option-card" data-action="Pozovi konobara">
+                <span class="option-icon">🛎️</span>
+                <span class="option-title" data-i18n="waiter_call">Pozovi konobara</span>
+            </div>
+            <div class="waiter-option-card" data-action="Donesi račun (kartica)">
+                <span class="option-icon">💳</span>
+                <span class="option-title" data-i18n="waiter_bill_card">Donesi račun (kartica)</span>
+            </div>
+            <div class="waiter-option-card" data-action="Donesi račun (gotovina)">
+                <span class="option-icon">💵</span>
+                <span class="option-title" data-i18n="waiter_bill_cash">Donesi račun (gotovina)</span>
+            </div>
+            <div class="waiter-option-card" data-action="Ponovi zadnju rundu">
+                <span class="option-icon">🔁</span>
+                <span class="option-title" data-i18n="waiter_repeat">Ponovi rundu</span>
+            </div>
+        </div>
+    </div>
+    -->
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const tipCards = document.querySelectorAll('.tip-card');
+            const noTipBtn = document.getElementById('noTipBtn');
+            const tipDisplay = document.getElementById('tipDisplay');
+            const totalDisplay = document.getElementById('totalDisplay');
+            const payText = document.getElementById('slidePayText');
+            const container = document.getElementById('slidePayContainer');
+            const handle = document.getElementById('slidePayHandle');
+            const bg = document.getElementById('slidePayBg');
+            
+            // Cart Data
+            const items = Cart.getItems();
+            const totals = Cart.getTotals();
+            const basePrice = totals.subtotal;
+            let currentTip = 15;
+            let currentTotal = basePrice * 1.15;
+            
+            // Render items
+            const summaryList = document.getElementById('checkoutSummaryList');
+            summaryList.innerHTML = `<span class="section-label" data-i18n="order_summary">${getTranslation('order_summary')}</span>`;
+            
+            let extrasHtml = '';
+            let totalExtras = 0;
+            const extrasNames = [];
+
+            items.forEach(item => {
+                const itemBaseTotal = item.price * item.qty;
+                const row = document.createElement('div');
+                row.className = 'summary-row';
+                row.innerHTML = `<span><span class="qty-tag">×${item.qty}</span> ${getTranslation(item.nameKey)}</span><span>${itemBaseTotal.toFixed(2)}€</span>`;
+                summaryList.appendChild(row);
+
+                if (item.modifiers && item.modifiers.length > 0) {
+                    item.modifiers.forEach(mod => {
+                        totalExtras += mod.price * item.qty;
+                        extrasNames.push(getTranslation(mod.key));
+                    });
+                }
+            });
+
+            if (totalExtras > 0) {
+                const extrasRow = document.createElement('div');
+                extrasRow.className = 'summary-row';
+                extrasRow.style.color = 'var(--text-muted)';
+                extrasRow.style.fontSize = '12px';
+                extrasRow.style.marginTop = '-5px';
+                extrasRow.style.paddingBottom = '15px';
+                extrasRow.innerHTML = `<span><span data-i18n="checkout_extras">${getTranslation('checkout_extras').split('(')[0]}</span> (${extrasNames.join(', ')})</span><span>${totalExtras.toFixed(2)}€</span>`;
+                summaryList.appendChild(extrasRow);
+            }
+
+            document.getElementById('checkoutBaseTotal').textContent = basePrice.toFixed(2) + '€';
+
+            // Initial Tip calculation for display
+            tipCards.forEach(c => {
+                const pct = parseInt(c.dataset.tip);
+                c.querySelector('.amt').textContent = (basePrice * pct / 100).toFixed(2) + '€';
+            });
+
+            function updatePrice(tipPct) {
+                currentTip = tipPct;
+                const tipAmt = basePrice * (tipPct / 100);
+                currentTotal = basePrice + tipAmt;
+                tipDisplay.textContent = tipPct === 0 ? '—' : tipAmt.toFixed(2) + '€';
+                totalDisplay.textContent = currentTotal.toFixed(2) + '€';
+                payText.innerHTML = `<span data-i18n="slide_to_pay">${getTranslation('slide_to_pay')}</span> · ${currentTotal.toFixed(2)}€`;
+            }
+
+            tipCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    tipCards.forEach(c => c.classList.remove('active'));
+                    card.classList.add('active');
+                    updatePrice(parseInt(card.dataset.tip));
+                });
+            });
+
+            noTipBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                tipCards.forEach(c => c.classList.remove('active'));
+                updatePrice(0);
+            });
+
+            // Tabs
+            const tabs = document.querySelectorAll('.pay-tab');
+            const cardContent = document.getElementById('cardContent');
+            const gpayContent = document.getElementById('gpayContent');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    const isCard = tab.dataset.tab === 'card';
+                    cardContent.classList.toggle('active', isCard);
+                    gpayContent.classList.toggle('active', !isCard);
+                });
+            });
+
+            // Validation
+            const emailInput = document.getElementById('emailInput');
+            const checks = document.querySelectorAll('.legal-check');
+
+            function validate() {
+                const isEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value);
+                const areChecksValid = Array.from(checks).every(c => c.checked);
+                const isValid = isEmailValid && areChecksValid;
+
+                if (isValid) {
+                    container.style.opacity = '1';
+                    container.style.pointerEvents = 'auto';
+                } else {
+                    container.style.opacity = '0.5';
+                    container.style.pointerEvents = 'none';
+                }
+            }
+
+            emailInput.addEventListener('input', validate);
+            checks.forEach(c => c.addEventListener('change', validate));
+
+            // Slide to Pay dragging logic
+            let isDragging = false;
+            let startX = 0;
+            let maxSlide = 0;
+
+            const initSlide = () => {
+                maxSlide = container.clientWidth - handle.clientWidth - 12; // padding offset
+            };
+
+            window.addEventListener('resize', initSlide);
+            setTimeout(initSlide, 200);
+
+            const onStart = (e) => {
+                if (container.style.pointerEvents === 'none') return;
+                isDragging = true;
+                startX = e.clientX || e.touches[0].clientX;
+                handle.style.transition = 'none';
+                bg.style.transition = 'none';
+            };
+
+            const onMove = (e) => {
+                if (!isDragging) return;
+                const currentX = e.clientX || e.touches[0].clientX;
+                let deltaX = currentX - startX;
+                
+                if (deltaX < 0) deltaX = 0;
+                if (deltaX > maxSlide) deltaX = maxSlide;
+                
+                handle.style.transform = `translateX(${deltaX}px)`;
+                bg.style.width = `${deltaX + 44}px`;
+            };
+
+            const onEnd = () => {
+                if (!isDragging) return;
+                isDragging = false;
+                
+                const currentTranslate = parseInt(handle.style.transform.replace(/[^\d.]/g, '')) || 0;
+                
+                if (currentTranslate >= maxSlide * 0.85) {
+                    // Success! Lock to the end and trigger payment
+                    handle.style.transition = 'transform 0.2s ease-out';
+                    bg.style.transition = 'width 0.2s ease-out';
+                    handle.style.transform = `translateX(${maxSlide}px)`;
+                    bg.style.width = '100%';
+                    
+                    payText.textContent = getTranslation('processing_pay');
+                    container.style.pointerEvents = 'none';
+                    
+                    setTimeout(() => {
+                        Cart.clear();
+                        window.location.href = '../08-success-screen/index.html';
+                    }, 2000);
+                } else {
+                    // Reset
+                    handle.style.transition = 'transform 0.3s ease';
+                    bg.style.transition = 'width 0.3s ease';
+                    handle.style.transform = 'translateX(0px)';
+                    bg.style.width = '44px';
+                }
+            };
+
+            handle.addEventListener('mousedown', onStart);
+            handle.addEventListener('touchstart', onStart, { passive: true });
+            
+            window.addEventListener('mousemove', onMove);
+            window.addEventListener('touchmove', onMove, { passive: false });
+            
+            window.addEventListener('mouseup', onEnd);
+            window.addEventListener('touchend', onEnd);
+
+            // Waiter Bottom Sheet Logic (HIDDEN)
+            /*
+            const waiterBtn = document.getElementById('waiterBtn');
+            const waiterSheet = document.getElementById('waiterSheet');
+            const waiterOverlay = document.getElementById('waiterOverlay');
+
+            if(waiterBtn) {
+                waiterBtn.addEventListener('click', () => {
+                    waiterSheet.classList.add('active');
+                    waiterOverlay.classList.add('active');
+                });
+
+                const closeWaiter = () => {
+                    waiterSheet.classList.remove('active');
+                    waiterOverlay.classList.remove('active');
+                };
+
+                waiterOverlay.addEventListener('click', closeWaiter);
+
+                document.querySelectorAll('.waiter-option-card').forEach(card => {
+                    card.addEventListener('click', function() {
+                        const action = this.getAttribute('data-action');
+                        closeWaiter();
+                        
+                        const toast = document.createElement('div');
+                        toast.className = 'toast';
+                        const prefix = getTranslation('waiter_sent');
+                        toast.textContent = `${prefix}"${action}"`;
+                        document.body.appendChild(toast);
+                        setTimeout(() => toast.remove(), 2800);
+                    });
+                });
+            }
+            */
+        });
+    </script>
+
+</body>
+</html>

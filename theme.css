@@ -1,0 +1,52 @@
+/* ==========================================================================
+   TAPLITO V5 — FUTURE-PROOF LIGHT THEME SETTINGS (2026-2031)
+   ========================================================================== */
+
+:root {
+    /* --- Futuristic Background & Depth --- */
+    --bg-color:           #FCFAF7; /* Clean warm paper background */
+    --bg-elevated:        #F4EFE6;
+    --card-bg:            rgba(255, 255, 255, 0.45);
+    
+    /* --- Glassmorphism --- */
+    --glass-bg:           rgba(252, 250, 247, 0.75);
+    --glass-border:       rgba(45, 26, 17, 0.06);
+    --glass-border-hover: rgba(45, 26, 17, 0.14);
+    --glass-blur:         20px;
+
+    /* --- Brand Colors --- */
+    --primary-orange:       #E05300; /* Warm premium orange */
+    --primary-orange-hover: #C24800;
+    --primary-orange-glow:  rgba(224, 83, 0, 0.15);
+    
+    /* --- Ambient Blob Gradients --- */
+    --blob-1: rgba(224, 83, 0, 0.04);
+    --blob-2: rgba(138, 43, 226, 0.03);
+
+    /* --- Typography Colors --- */
+    --text-main:      #1F120A; /* Deep dark cocoa text */
+    --text-secondary: #4A3E38;
+    --text-muted:     #8E837D;
+
+    /* --- Border & Accents --- */
+    --border-color:       rgba(45, 26, 17, 0.07);
+    --border-color-hover: rgba(45, 26, 17, 0.15);
+    --accent-glow:        rgba(224, 83, 0, 0.1);
+
+    /* --- Status Colors --- */
+    --status-success: #248A3D;
+    --status-warning: #C77C02;
+    --status-error:   #B82A2A;
+    --status-info:    #0056B3;
+
+    /* --- Shadows --- */
+    --shadow-sm:   0 2px 10px rgba(31, 18, 10, 0.02);
+    --shadow-md:   0 8px 30px rgba(31, 18, 10, 0.05);
+    --shadow-lg:   0 16px 50px rgba(31, 18, 10, 0.08);
+    --shadow-glow: 0 4px 30px var(--accent-glow);
+    --shadow-btn:  0 8px 30px rgba(224, 83, 0, 0.25);
+
+    /* --- Shape & Borders --- */
+    --border-radius-soft:   20px;
+    --border-radius-button: 100px;
+}

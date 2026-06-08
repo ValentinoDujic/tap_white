@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Taplito - Gourmet Burger</title>
+    <!-- Global Design System -->
+    <link rel="stylesheet" href="../../global.css">
+    <!-- Component Specific Styles -->
+    <link rel="stylesheet" href="style.css">
+    <script src="../../translations.js"></script>
+    <script src="../../cart.js"></script>
+</head>
+<body>
+
+    <!-- Ambient Background Blobs -->
+    <div class="ambient-bg">
+        <div class="ambient-blob ambient-blob-1"></div>
+        <div class="ambient-blob ambient-blob-2"></div>
+    </div>
+    <div class="cyber-grid"></div>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="product-hero">
+            <div class="hero-top-bar" style="position: absolute; top: 20px; left: 20px; right: 20px; display: flex; justify-content: space-between; align-items: center; z-index: 10;">
+                <a href="../02-main-screen/index.html" class="back-btn" style="position: static;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                </a>
+                <!-- Language Selector -->
+                <div class="lang-selector" style="background: rgba(0, 0, 0, 0.45); border-color: rgba(255, 255, 255, 0.2); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);">
+                    <span class="lang-pill active" data-lang="hr" style="color: rgba(255, 255, 255, 0.65);">HR</span>
+                    <span class="lang-pill" data-lang="en" style="color: rgba(255, 255, 255, 0.65);">EN</span>
+                </div>
+            </div>
+            <img src="assets/burger_v2.png" alt="Gourmet Burger">
+            <span class="image-disclaimer" data-i18n="image_disclaimer">Slika je simbolična</span>
+        </section>
+
+        <!-- Product Content -->
+        <div class="product-content">
+            <h1 class="product-title" data-i18n="item_burger">Gourmet Burger</h1>
+            <p class="product-description" data-i18n="desc_burger_long">
+                Naš prepoznatljivi burger od 100% domaće junetine, serviran u mekanom brioche pecivu s otopljenim cheddar sirom, hrskavom slaninom, svježom zelenom salatom i našim tajnim umakom.
+            </p>
+
+            <section>
+                <span class="section-label" data-i18n="details">Detalji</span>
+                <div class="details-row">
+                    <span data-i18n="price">Cijena</span>
+                    <span class="price-val">9.40€</span>
+                </div>
+                <div class="details-row">
+                    <span data-i18n="allergens">Alergeni</span>
+                    <span class="val" data-i18n="allergens_burger">Gluten, Jaja, Mlijeko</span>
+                </div>
+                <div class="details-row">
+                    <span data-i18n="calories">Kalorije</span>
+                    <span class="val" style="color: var(--text-muted);">650 kcal</span>
+                </div>
+            </section>
+
+            <!-- Modifiers -->
+            <section class="modifier-group">
+                <span class="section-label" data-i18n="mod_extras">Dodaci po želji</span>
+                <div class="radio-item active" data-mod-price="0" data-mod-key="mod_burger_classic">
+                    <span data-i18n="mod_burger_classic">Klasični (sa svime)</span>
+                    <div class="radio-circle"></div>
+                </div>
+                <div class="radio-item" data-mod-price="0" data-mod-key="mod_burger_no_onion">
+                    <span data-i18n="mod_burger_no_onion">Bez luka</span>
+                    <div class="radio-circle"></div>
+                </div>
+                <div class="radio-item" data-mod-price="1.20" data-mod-key="mod_burger_bacon">
+                    <span data-i18n="mod_burger_bacon">Extra Bacon (+1.20€)</span>
+                    <div class="radio-circle"></div>
+                </div>
+            </section>
+
+            <!-- Note -->
+            <section class="note-area" style="margin-bottom: 20px;">
+                <span class="section-label" data-i18n="note_kitchen">Napomena za kuhinju</span>
+                <textarea data-i18n="note_kitchen_ph" placeholder="Npr. Slabije pečen, bez umaka ili slično..."></textarea>
+            </section>
+
+            <!-- Upsell -->
+            <section class="upsell-section">
+                <span class="section-label" data-i18n="upsell_burger">Najbolje uz burger</span>
+                <div class="upsell-container">
+                    <div class="upsell-card">
+                        <img src="assets/upsell2.png" alt="Cocktail">
+                        <span>Summer Mix</span>
+                    </div>
+                    <div class="upsell-card">
+                        <img src="assets/upsell3.png" alt="Espresso">
+                        <span data-i18n="item_espresso">Espresso</span>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Sticky Footer -->
+    <footer class="product-footer">
+        <div class="qty-selector">
+            <button class="qty-btn" id="minus">—</button>
+            <span class="qty-val" id="qty">1</span>
+            <button class="qty-btn" id="plus">+</button>
+        </div>
+        <button class="add-to-order-btn">
+            <span data-i18n="add_to_order">Dodaj u narudžbu</span>
+            <span id="btn-price">9.40€</span>
+        </button>
+    </footer>
+
+    <!-- Floating Waiter Button (HIDDEN) -->
+    <!--
+    <button class="waiter-fab" id="waiterBtn" aria-label="Pozovi konobara">🛎️</button>
+    -->
+
+    <!-- Waiter Bottom Sheet (HIDDEN) -->
+    <!--
+    <div class="bottom-sheet-overlay" id="waiterOverlay"></div>
+    <div class="bottom-sheet" id="waiterSheet">
+        <div class="bottom-sheet-handle"></div>
+        <h2 data-i18n="waiter_title">🛎️ Usluga za stolom</h2>
+        <p data-i18n="waiter_desc">Odaberite što trebate i konobar stiže za Vaš stol (Stol 12).</p>
+        <div class="waiter-options">
+            <div class="waiter-option-card" data-action="Pozovi konobara">
+                <span class="option-icon">🛎️</span>
+                <span class="option-title" data-i18n="waiter_call">Pozovi konobara</span>
+            </div>
+            <div class="waiter-option-card" data-action="Donesi račun (kartica)">
+                <span class="option-icon">💳</span>
+                <span class="option-title" data-i18n="waiter_bill_card">Donesi račun (kartica)</span>
+            </div>
+            <div class="waiter-option-card" data-action="Donesi račun (gotovina)">
+                <span class="option-icon">💵</span>
+                <span class="option-title" data-i18n="waiter_bill_cash">Donesi račun (gotovina)</span>
+            </div>
+            <div class="waiter-option-card" data-action="Ponovi zadnju rundu">
+                <span class="option-icon">🔁</span>
+                <span class="option-title" data-i18n="waiter_repeat">Ponovi rundu</span>
+            </div>
+        </div>
+    </div>
+    -->
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Radio items toggle
+            const items = document.querySelectorAll('.radio-item');
+            items.forEach(item => {
+                item.addEventListener('click', () => {
+                    items.forEach(i => i.classList.remove('active'));
+                    item.classList.add('active');
+                    updateQty();
+                });
+            });
+
+            // Qty control
+            let qty = 1;
+            const basePrice = 9.40;
+            const qtyLabel = document.getElementById('qty');
+            const btnPrice = document.getElementById('btn-price');
+
+            document.getElementById('plus').addEventListener('click', () => {
+                qty++;
+                updateQty();
+            });
+
+            document.getElementById('minus').addEventListener('click', () => {
+                if(qty > 1) {
+                    qty--;
+                    updateQty();
+                }
+            });
+
+            function updateQty() {
+                const activeMod = document.querySelector('.radio-item.active');
+                const modPrice = parseFloat(activeMod.getAttribute('data-mod-price'));
+                const totalUnit = basePrice + modPrice;
+                
+                qtyLabel.textContent = qty;
+                btnPrice.textContent = (qty * totalUnit).toFixed(2) + '€';
+            }
+            
+            document.querySelector('.add-to-order-btn').addEventListener('click', () => {
+                const activeMod = document.querySelector('.radio-item.active');
+                const modKey = activeMod.getAttribute('data-mod-key');
+                const mods = modKey === 'mod_burger_classic' ? [] : [{
+                    key: modKey,
+                    price: parseFloat(activeMod.getAttribute('data-mod-price'))
+                }];
+                
+                Cart.addItem({
+                    id: 'item_burger',
+                    nameKey: 'item_burger',
+                    price: basePrice,
+                    qty: qty,
+                    modifiers: mods
+                });
+                
+                window.location.href = '../04-summary-screen/index.html';
+            });
+
+            // 3D Tilt effect on product image
+            const hero = document.querySelector('.product-hero');
+            const img = document.querySelector('.product-hero img');
+            if (hero && img) {
+                img.style.transition = 'transform 0.1s ease-out';
+                
+                hero.addEventListener('mousemove', (e) => {
+                    const rect = hero.getBoundingClientRect();
+                    const x = e.clientX - rect.left - rect.width / 2;
+                    const y = e.clientY - rect.top - rect.height / 2;
+                    
+                    const rotX = -(y / (rect.height / 2)) * 12;
+                    const rotY = (x / (rect.width / 2)) * 12;
+                    
+                    img.style.transform = `perspective(1000px) rotateX(${rotX}deg) rotateY(${rotY}deg) scale(1.06)`;
+                });
+                
+                hero.addEventListener('mouseleave', () => {
+                    img.style.transition = 'transform 0.5s ease';
+                    img.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
+                });
+            }
+
+            // Waiter Bottom Sheet Logic (HIDDEN)
+            /*
+            const waiterBtn = document.getElementById('waiterBtn');
+            const waiterSheet = document.getElementById('waiterSheet');
+            const waiterOverlay = document.getElementById('waiterOverlay');
+
+            if(waiterBtn) {
+                waiterBtn.addEventListener('click', () => {
+                    waiterSheet.classList.add('active');
+                    waiterOverlay.classList.add('active');
+                });
+
+                const closeWaiter = () => {
+                    waiterSheet.classList.remove('active');
+                    waiterOverlay.classList.remove('active');
+                };
+
+                waiterOverlay.addEventListener('click', closeWaiter);
+
+                document.querySelectorAll('.waiter-option-card').forEach(card => {
+                    card.addEventListener('click', function() {
+                        const action = this.getAttribute('data-action');
+                        closeWaiter();
+                        
+                        const toast = document.createElement('div');
+                        toast.className = 'toast';
+                        const prefix = getTranslation('waiter_sent');
+                        toast.textContent = `${prefix}"${action}"`;
+                        document.body.appendChild(toast);
+                        setTimeout(() => toast.remove(), 2800);
+                    });
+                });
+            }
+            */
+        });
+    </script>
+
+</body>
+</html>

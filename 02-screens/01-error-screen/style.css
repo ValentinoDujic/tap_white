@@ -1,0 +1,78 @@
+/* Error Screen — Component Styles
+   Uses: .btn-primary from global.css
+   ========================================================================== */
+
+.error-container {
+    height: 100vh;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 40px;
+    text-align: center;
+    animation: pageEnter var(--duration-page) var(--ease-out-expo);
+}
+
+.error-logo {
+    font-size: 28px;
+    font-weight: 900;
+    letter-spacing: -1px;
+    margin-bottom: 50px;
+    position: absolute;
+    top: 60px;
+    background: linear-gradient(135deg, var(--text-main), var(--primary-orange));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.error-img {
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
+    margin-bottom: 30px;
+    filter: drop-shadow(0 20px 40px rgba(0,0,0,0.3));
+    animation: scaleUp 0.6s var(--ease-out-expo);
+}
+
+.error-container h1 {
+    font-size: 24px;
+    font-weight: 800;
+    margin-bottom: 15px;
+    color: var(--text-main);
+    animation: fadeInUp 0.5s var(--ease-out-expo) 0.2s both;
+}
+
+.error-container p {
+    color: var(--text-muted);
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 40px;
+    animation: fadeInUp 0.5s var(--ease-out-expo) 0.3s both;
+}
+
+.error-actions {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    animation: fadeInUp 0.5s var(--ease-out-expo) 0.4s both;
+}
+
+/* Uses .btn-primary from global.css */
+.retry-btn {
+    justify-content: center;
+}
+
+.support-link {
+    color: var(--text-muted);
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: color var(--duration-fast) ease;
+}
+
+.support-link:hover {
+    color: var(--text-main);
+}

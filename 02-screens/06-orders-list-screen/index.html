@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Taplito - Moje narudžbe</title>
+    <!-- Global Design System -->
+    <link rel="stylesheet" href="../../global.css">
+    <!-- Component Specific Styles -->
+    <link rel="stylesheet" href="style.css">
+    <script src="../../translations.js"></script>
+</head>
+<body>
+
+    <!-- Ambient Background Blobs -->
+    <div class="ambient-bg">
+        <div class="ambient-blob ambient-blob-1"></div>
+        <div class="ambient-blob ambient-blob-2"></div>
+    </div>
+    <div class="cyber-grid"></div>
+
+    <header class="page-header">
+        <a href="../02-main-screen/index.html" class="back-btn" aria-label="Natrag">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        </a>
+        <h1 data-i18n="orders_title">Moje narudžbe</h1>
+        <!-- Language Selector -->
+        <div class="lang-selector" style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%);">
+            <span class="lang-pill active" data-lang="hr">HR</span>
+            <span class="lang-pill" data-lang="en">EN</span>
+        </div>
+    </header>
+
+    <div class="orders-tabs">
+        <div class="order-tab active" data-tab="active" data-i18n="tab_active">Aktivno</div>
+        <div class="order-tab" data-tab="history" data-i18n="tab_history">Povijest</div>
+    </div>
+
+    <main class="container">
+        <!-- Active Orders List -->
+        <div id="activeList" class="orders-list active">
+            <!-- Card 1 -->
+            <div class="order-card">
+                <div class="card-top">
+                    <div>
+                        <h2>THE BULLORDS</h2>
+                        <span class="card-date" data-i18n="date_today_2115">Danas, 21:15</span>
+                    </div>
+                    <span class="status-badge status-preparing" data-i18n="status_prep">U pripremi</span>
+                </div>
+                <div class="card-items" data-i18n="items_order1">
+                    Gourmet Burger × 1, Cappuccino × 1, Dodaci...
+                </div>
+                <div class="card-footer">
+                    <span class="order-total">17.25€</span>
+                    <a href="../07-order-detail-screen/index.html" class="card-cta"><span data-i18n="details_btn">Detalji</span> →</a>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="order-card" style="animation-delay: 0.1s;">
+                <div class="card-top">
+                    <div>
+                        <h2>THE BULLORDS</h2>
+                        <span class="card-date" data-i18n="date_today_2040">Danas, 20:40</span>
+                    </div>
+                    <span class="status-badge status-delivered" data-i18n="status_delivered">Dostavljeno</span>
+                </div>
+                <div class="card-items" data-i18n="items_order2">
+                    Coca Cola × 1, Espresso × 2
+                </div>
+                <div class="card-footer">
+                    <span class="order-total">6.60€</span>
+                    <a href="#" class="card-cta"><span data-i18n="details_btn">Detalji</span> →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- History Orders List -->
+        <div id="historyList" class="orders-list">
+            <!-- Card History 1 -->
+            <div class="order-card">
+                <div class="card-top">
+                    <div>
+                        <h2>THE BULLORDS</h2>
+                        <span class="card-date" data-i18n="date_yest_1920">Jučer, 19:20</span>
+                    </div>
+                    <span class="status-badge status-completed" data-i18n="status_completed">Završeno</span>
+                </div>
+                <div class="card-items" data-i18n="items_order3">
+                    Miješano meso × 1, Pivo 0.5l × 2
+                </div>
+                <div class="card-footer">
+                    <span class="order-total">22.40€</span>
+                    <a href="#" class="card-cta"><span data-i18n="reorder_btn">Naruči ponovno</span> →</a>
+                </div>
+            </div>
+
+            <!-- Card History 2 -->
+            <div class="order-card">
+                <div class="card-top">
+                    <div>
+                        <h2>THE BULLORDS</h2>
+                        <span class="card-date">08.05.2026, 14:10</span>
+                    </div>
+                    <span class="status-badge status-cancelled" data-i18n="status_cancelled">Otkazano</span>
+                </div>
+                <div class="card-items" data-i18n="items_order4">
+                    Kava s mlijekom × 1
+                </div>
+                <div class="card-footer">
+                    <span class="order-total">1.80€</span>
+                    <a href="#" class="card-cta"><span data-i18n="reorder_btn">Naruči ponovno</span> →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Empty State -->
+        <div id="emptyState" class="empty-orders" style="display: none;">
+            <span class="empty-icon">🧾</span>
+            <h3 data-i18n="empty_title">Nemaš još narudžbi</h3>
+            <p data-i18n="empty_desc">Tvoja povijest narudžbi je prazna. Vrijeme je da nešto naručiš!</p>
+            <a href="../02-main-screen/index.html" class="btn-primary" style="justify-content: center; margin-top: 10px;" data-i18n="open_menu">Otvori meni</a>
+        </div>
+    </main>
+
+    <!-- Floating Waiter Button (HIDDEN) -->
+    <!--
+    <button class="waiter-fab" id="waiterBtn" aria-label="Pozovi konobara">🛎️</button>
+    -->
+
+    <!-- Waiter Bottom Sheet (HIDDEN) -->
+    <!--
+    <div class="bottom-sheet-overlay" id="waiterOverlay"></div>
+    <div class="bottom-sheet" id="waiterSheet">
+        <div class="bottom-sheet-handle"></div>
+        <h2 data-i18n="waiter_title">🛎️ Usluga za stolom</h2>
+        <p data-i18n="waiter_desc">Odaberite što trebate i konobar stiže za Vaš stol (Stol 12).</p>
+        <div class="waiter-options">
+            <div class="waiter-option-card" data-action="Pozovi konobara">
+                <span class="option-icon">🛎️</span>
+                <span class="option-title" data-i18n="waiter_call">Pozovi konobara</span>
+            </div>
+            <div class="waiter-option-card" data-action="Donesi račun (kartica)">
+                <span class="option-icon">💳</span>
+                <span class="option-title" data-i18n="waiter_bill_card">Donesi račun (kartica)</span>
+            </div>
+            <div class="waiter-option-card" data-action="Donesi račun (gotovina)">
+                <span class="option-icon">💵</span>
+                <span class="option-title" data-i18n="waiter_bill_cash">Donesi račun (gotovina)</span>
+            </div>
+            <div class="waiter-option-card" data-action="Ponovi zadnju rundu">
+                <span class="option-icon">🔁</span>
+                <span class="option-title" data-i18n="waiter_repeat">Ponovi rundu</span>
+            </div>
+        </div>
+    </div>
+    -->
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabs = document.querySelectorAll('.order-tab');
+            const activeList = document.getElementById('activeList');
+            const historyList = document.getElementById('historyList');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    const isActive = tab.dataset.tab === 'active';
+                    activeList.classList.toggle('active', isActive);
+                    historyList.classList.toggle('active', !isActive);
+                });
+            });
+
+            // Waiter Bottom Sheet Logic (HIDDEN)
+            /*
+            const waiterBtn = document.getElementById('waiterBtn');
+            const waiterSheet = document.getElementById('waiterSheet');
+            const waiterOverlay = document.getElementById('waiterOverlay');
+
+            if(waiterBtn) {
+                waiterBtn.addEventListener('click', () => {
+                    waiterSheet.classList.add('active');
+                    waiterOverlay.classList.add('active');
+                });
+
+                const closeWaiter = () => {
+                    waiterSheet.classList.remove('active');
+                    waiterOverlay.classList.remove('active');
+                };
+
+                waiterOverlay.addEventListener('click', closeWaiter);
+
+                document.querySelectorAll('.waiter-option-card').forEach(card => {
+                    card.addEventListener('click', function() {
+                        const action = this.getAttribute('data-action');
+                        closeWaiter();
+                        
+                        const toast = document.createElement('div');
+                        toast.className = 'toast';
+                        const prefix = getTranslation('waiter_sent');
+                        toast.textContent = `${prefix}"${action}"`;
+                        document.body.appendChild(toast);
+                        setTimeout(() => toast.remove(), 2800);
+                    });
+                });
+            }
+            */
+        });
+    </script>
+
+</body>
+</html>

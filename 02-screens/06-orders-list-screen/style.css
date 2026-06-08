@@ -1,0 +1,199 @@
+/* Orders List Screen — Component Styles
+   Shared: .section-label, .btn-primary from global.css
+   ========================================================================== */
+
+/* --- Header --- */
+.orders-header {
+    height: var(--header-height);
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    position: sticky;
+    top: 0;
+    background: var(--bg-color);
+    z-index: 100;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.orders-header h1 {
+    font-size: 18px;
+    font-weight: 700;
+    flex: 1;
+    text-align: center;
+    margin-right: 40px;
+}
+
+/* --- Tabs --- */
+.orders-tabs {
+    display: flex;
+    background: var(--bg-color);
+    padding: 5px 20px;
+    position: sticky;
+    top: var(--header-height);
+    z-index: 90;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.order-tab {
+    flex: 1;
+    text-align: center;
+    padding: 15px;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-muted);
+    cursor: pointer;
+    position: relative;
+    transition: color var(--duration-normal) ease;
+}
+
+.order-tab.active {
+    color: var(--text-main);
+}
+
+.order-tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 25%;
+    right: 25%;
+    height: 3px;
+    background: var(--primary-orange);
+    border-radius: 3px 3px 0 0;
+}
+
+/* --- Order Cards --- */
+.orders-list {
+    padding: 20px 0;
+    display: none;
+    animation: fadeInUp var(--duration-page) var(--ease-out-expo);
+}
+
+.orders-list.active {
+    display: block;
+}
+
+.order-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid var(--glass-border);
+    border-radius: var(--border-radius-lg);
+    padding: 20px;
+    margin-bottom: 15px;
+    transition: border-color var(--duration-normal) ease,
+                transform var(--duration-fast) var(--ease-out-expo);
+}
+
+.order-card:active {
+    transform: scale(0.98);
+}
+
+.card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 15px;
+}
+
+.card-top h2 {
+    font-size: 16px;
+    font-weight: 800;
+    margin-bottom: 4px;
+}
+
+.card-date {
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+/* --- Status Badges --- */
+.status-badge {
+    padding: 6px 12px;
+    border-radius: var(--border-radius-pill);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    flex-shrink: 0;
+}
+
+.status-preparing { background: rgba(199, 124, 2, 0.15); color: var(--status-warning); }
+.status-delivered  { background: rgba(0, 86, 179, 0.15); color: var(--status-info); }
+.status-completed  { background: rgba(36, 138, 61, 0.15); color: var(--status-success); }
+.status-cancelled  { background: rgba(184, 42, 42, 0.15); color: var(--status-error); }
+
+/* --- Card Middle --- */
+.card-items {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* --- Card Bottom --- */
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.order-total {
+    font-weight: 800;
+    font-size: 16px;
+}
+
+.card-cta {
+    color: var(--primary-orange);
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: opacity var(--duration-fast) ease;
+}
+
+.card-cta:active {
+    opacity: 0.6;
+}
+
+/* --- Empty State --- */
+.empty-orders {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.empty-icon {
+    font-size: 48px;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.empty-orders h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.empty-orders p {
+    color: var(--text-muted);
+    font-size: 14px;
+    margin-bottom: 30px;
+}
+
+.menu-btn {
+    background: var(--primary-orange);
+    color: white;
+    padding: 12px 30px;
+    border-radius: var(--border-radius-pill);
+    text-decoration: none;
+    font-weight: 700;
+    display: inline-block;
+    box-shadow: var(--shadow-btn);
+    transition: transform var(--duration-fast) var(--ease-out-expo);
+}
+
+.menu-btn:active {
+    transform: scale(0.97);
+}

@@ -1,0 +1,1005 @@
+/* ==========================================================================
+   TAPLITO V4 — UNIFIED GLOBAL DESIGN SYSTEM
+   Centralized tokens, components, utilities & transitions
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
+
+@import url('theme.css');
+
+:root {
+    /* --- Typography --- */
+    --font-primary: 'Outfit', sans-serif;
+    
+    /* --- Dimensions --- */
+    --header-height: 64px;
+    --footer-height: 96px;
+    --safe-bottom: env(safe-area-inset-bottom, 0px);
+    --border-radius-sm: 8px;
+    --border-radius-md: 12px;
+    --border-radius-lg: 20px;
+    --border-radius-xl: 24px;
+    --border-radius-pill: 100px;
+    
+    /* --- Text on images (always white for readability) --- */
+    --text-on-image: #FFFFFF;
+    --text-on-image-muted: rgba(255, 255, 255, 0.85);
+    --overlay-dark: rgba(0, 0, 0, 0.5);
+    --overlay-gradient-dark: rgba(0, 0, 0, 0.65);
+    
+    /* --- Transitions --- */
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);
+    --ease-spring: cubic-bezier(0.22, 1, 0.36, 1);
+    --duration-fast: 200ms;
+    --duration-normal: 300ms;
+    --duration-slow: 500ms;
+    --duration-page: 400ms;
+}
+
+
+
+/* ==========================================================================
+   BASE RESET
+   ========================================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    font-family: var(--font-primary);
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    line-height: 1.5;
+    overflow-x: hidden;
+    min-height: 100vh;
+    min-height: 100dvh;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button {
+    font-family: inherit;
+    cursor: pointer;
+    border: none;
+    background: none;
+    color: inherit;
+}
+
+/* ==========================================================================
+   LAYOUT UTILITIES
+   ========================================================================== */
+
+.container {
+    padding: 0 20px;
+}
+
+/* ==========================================================================
+   SHARED COMPONENT: Section Label
+   ========================================================================== */
+
+.section-label {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    display: block;
+}
+
+/* ==========================================================================
+   SHARED COMPONENT: Glass Panel
+   ========================================================================== */
+
+.glass-panel {
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border-color);
+}
+
+/* ==========================================================================
+   SHARED COMPONENT: Sticky Page Header (inner pages)
+   ========================================================================== */
+
+.page-header {
+    height: var(--header-height);
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    position: sticky;
+    top: 0;
+    background: var(--bg-color);
+    z-index: 100;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.page-header h1 {
+    font-size: 18px;
+    font-weight: 700;
+    flex: 1;
+    text-align: center;
+    /* offset for back button so title is truly centered */
+    margin-right: 40px;
+}
+
+/* ==========================================================================
+   SHARED COMPONENT: Back Button
+   ========================================================================== */
+
+.back-btn {
+    width: 40px;
+    height: 40px;
+    background: var(--card-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-main);
+    text-decoration: none;
+    flex-shrink: 0;
+    transition: background var(--duration-fast) ease, 
+                transform var(--duration-fast) ease;
+}
+
+.back-btn:active {
+    transform: scale(0.92);
+    background: var(--border-color-hover);
+}
+
+/* ==========================================================================
+   SHARED COMPONENT: Primary CTA Button
+   ========================================================================== */
+
+.btn-primary {
+    width: 100%;
+    height: 56px;
+    background: var(--primary-orange);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius-pill);
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 800;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 24px;
+    gap: 8px;
+    box-shadow: var(--shadow-btn);
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform var(--duration-fast) var(--ease-out-expo),
+                box-shadow var(--duration-normal) ease,
+                background var(--duration-fast) ease;
+}
+
+.btn-primary:hover {
+    background: var(--primary-orange-hover);
+    box-shadow: 0 10px 35px rgba(239, 105, 30, 0.5);
+}
+
+.btn-primary:active {
+    transform: scale(0.97);
+}
+
+.btn-primary.disabled,
+.btn-primary:disabled {
+    opacity: 0.4;
+    pointer-events: none;
+}
+
+.btn-primary.loading {
+    color: transparent;
+    pointer-events: none;
+    position: relative;
+}
+
+.btn-primary.loading::after {
+    content: "";
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    border: 3px solid rgba(255,255,255,0.3);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spin 0.8s linear infinite;
+}
+
+/* ==========================================================================
+   SHARED COMPONENT: Secondary Button (Ghost / Subtle)
+   ========================================================================== */
+
+.btn-secondary {
+    width: 100%;
+    height: 56px;
+    background: var(--card-bg);
+    color: var(--text-main);
+    border: 1.5px solid var(--border-color);
+    border-radius: var(--border-radius-pill);
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 700;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform var(--duration-fast) var(--ease-out-expo),
+                border-color var(--duration-normal) ease;
+}
+
+.btn-secondary:hover {
+    border-color: var(--border-color-hover);
+}
+
+.btn-secondary:active {
+    transform: scale(0.97);
+}
+
+/* ==========================================================================
+   SHARED COMPONENT: Sticky Footer
+   ========================================================================== */
+
+.page-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px;
+    padding-bottom: calc(20px + var(--safe-bottom));
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-top: 1px solid var(--border-color);
+    z-index: 1000;
+}
+
+/* ==========================================================================
+   SHARED COMPONENT: FAB Bottom Bar (30/70 split)
+   ========================================================================== */
+
+.bottom-actions-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px;
+    padding-bottom: calc(20px + var(--safe-bottom));
+    background: linear-gradient(to top, var(--bg-color) 50%, transparent 100%);
+    display: flex;
+    gap: 12px;
+    z-index: 1000;
+    pointer-events: none;
+}
+
+.bottom-actions-container > * {
+    pointer-events: auto;
+}
+
+.order-status-btn {
+    flex: 0 0 60px;
+    height: 56px;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-pill);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    text-decoration: none;
+    color: var(--text-main);
+    transition: border-color var(--duration-normal) ease,
+                transform var(--duration-fast) var(--ease-out-expo);
+    animation: slideUp 0.6s var(--ease-out-expo);
+}
+
+.order-status-btn:active {
+    transform: scale(0.95);
+}
+
+.cart-fab {
+    flex: 1;
+    height: 56px;
+    background: var(--primary-orange);
+    color: white;
+    border-radius: var(--border-radius-pill);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    text-decoration: none;
+    font-weight: 800;
+    box-shadow: var(--shadow-btn);
+    transition: transform var(--duration-fast) var(--ease-out-expo),
+                box-shadow var(--duration-normal) ease;
+    animation: slideUp 0.7s var(--ease-out-expo);
+}
+
+.cart-fab:active {
+    transform: scale(0.97);
+}
+
+.cart-count {
+    background: rgba(255,255,255,0.25);
+    padding: 4px 10px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 800;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+/* ==========================================================================
+   SHARED COMPONENT: Order Status Pill (spinner inside status btn)
+   ========================================================================== */
+
+.status-icon-wrapper {
+    position: relative;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.spinner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 2px solid transparent;
+    border-top-color: var(--primary-orange);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+/* ==========================================================================
+   SHARED COMPONENT: Textarea
+   ========================================================================== */
+
+textarea {
+    width: 100%;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-md);
+    color: var(--text-main);
+    padding: 15px;
+    font-family: inherit;
+    font-size: 14px;
+    resize: none;
+    min-height: 100px;
+    outline: none;
+    transition: border-color var(--duration-normal) ease;
+}
+
+textarea:focus {
+    border-color: var(--primary-orange);
+}
+
+textarea::placeholder {
+    color: var(--text-muted);
+    font-size: 13px;
+}
+
+/* ==========================================================================
+   SHARED COMPONENT: Upsell Cards
+   ========================================================================== */
+
+.upsell-section {
+    margin-top: 30px;
+}
+
+.upsell-container,
+.upsell-scroll {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    margin-top: 15px;
+    padding-bottom: 10px;
+    -webkit-overflow-scrolling: touch;
+}
+
+.upsell-container::-webkit-scrollbar,
+.upsell-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+.upsell-card {
+    flex: 0 0 120px;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-md);
+    padding: 8px;
+    text-align: center;
+    position: relative;
+    transition: border-color var(--duration-normal) ease,
+                transform var(--duration-fast) var(--ease-out-expo);
+}
+
+.upsell-card:active {
+    transform: scale(0.96);
+}
+
+.upsell-card img {
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 8px;
+    object-fit: cover;
+    margin-bottom: 6px;
+}
+
+.upsell-card span {
+    font-size: 12px;
+    font-weight: 600;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.upsell-add-btn {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    width: 24px;
+    height: 24px;
+    background: var(--primary-orange);
+    border: none;
+    border-radius: 50%;
+    color: white;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    transition: transform var(--duration-fast) ease,
+                background var(--duration-fast) ease;
+}
+
+.upsell-add-btn:active {
+    transform: scale(0.85);
+}
+
+/* ==========================================================================
+   PAGE TRANSITION SYSTEM
+   ========================================================================== */
+
+.page-transition {
+    animation: pageEnter var(--duration-page) var(--ease-out-expo) both;
+}
+
+.page-transition-slide {
+    animation: pageSlideIn var(--duration-page) var(--ease-out-expo) both;
+}
+
+.page-transition-scale {
+    animation: pageScaleIn var(--duration-page) var(--ease-out-expo) both;
+}
+
+/* Stagger children for sequential reveal */
+.stagger-children > * {
+    opacity: 0;
+    animation: staggerIn var(--duration-slow) var(--ease-out-expo) both;
+}
+
+.stagger-children > *:nth-child(1) { animation-delay: 0.05s; }
+.stagger-children > *:nth-child(2) { animation-delay: 0.1s; }
+.stagger-children > *:nth-child(3) { animation-delay: 0.15s; }
+.stagger-children > *:nth-child(4) { animation-delay: 0.2s; }
+.stagger-children > *:nth-child(5) { animation-delay: 0.25s; }
+.stagger-children > *:nth-child(6) { animation-delay: 0.3s; }
+.stagger-children > *:nth-child(7) { animation-delay: 0.35s; }
+.stagger-children > *:nth-child(8) { animation-delay: 0.4s; }
+
+/* ==========================================================================
+   GLOBAL ANIMATIONS
+   ========================================================================== */
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pageEnter {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pageSlideIn {
+    from { opacity: 0; transform: translateX(30px); }
+    to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes pageScaleIn {
+    from { opacity: 0; transform: scale(0.96); }
+    to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes staggerIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scaleUp {
+    from { transform: scale(0); }
+    to   { transform: scale(1); }
+}
+
+@keyframes spin {
+    0%   { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+    0%   { box-shadow: 0 0 0 0 rgba(239, 105, 30, 0.4); }
+    70%  { box-shadow: 0 0 0 12px rgba(239, 105, 30, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(239, 105, 30, 0); }
+}
+
+@keyframes shimmer {
+    0%   { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+/* ==========================================================================
+   TOAST NOTIFICATION
+   ========================================================================== */
+
+.toast {
+    position: fixed;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--text-main);
+    color: var(--bg-color);
+    padding: 12px 24px;
+    border-radius: var(--border-radius-pill);
+    font-size: 14px;
+    font-weight: 600;
+    z-index: 10000;
+    box-shadow: var(--shadow-lg);
+    animation: toastIn 0.35s var(--ease-out-expo), 
+               toastOut 0.35s ease 2.2s forwards;
+    pointer-events: none;
+}
+
+@keyframes toastIn {
+    from { opacity: 0; transform: translate(-50%, -20px) scale(0.95); }
+    to   { opacity: 1; transform: translate(-50%, 0) scale(1); }
+}
+
+@keyframes toastOut {
+    from { opacity: 1; transform: translate(-50%, 0); }
+    to   { opacity: 0; transform: translate(-50%, -10px); }
+}
+
+/* ==========================================================================
+   FOCUS & ACCESSIBILITY
+   ========================================================================== */
+
+:focus-visible {
+    outline: 2px solid var(--primary-orange);
+    outline-offset: 2px;
+}
+
+/* Hide scrollbars globally for overflow-x scroll areas */
+.hide-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+/* ==========================================================================
+   TAPLITO V5 — ADVANCED FUTURISTIC STYLES
+   ========================================================================== */
+
+/* --- V5 Background Ambient Blobs --- */
+.ambient-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -2;
+    overflow: hidden;
+    pointer-events: none;
+    background: var(--bg-color);
+}
+
+.ambient-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.75;
+    animation: floatBlob 25s infinite alternate ease-in-out;
+}
+
+.ambient-blob-1 {
+    top: -10%;
+    right: -10%;
+    width: 50vw;
+    height: 50vw;
+    background: var(--blob-1);
+    animation-duration: 20s;
+}
+
+.ambient-blob-2 {
+    bottom: -10%;
+    left: -10%;
+    width: 60vw;
+    height: 60vw;
+    background: var(--blob-2);
+    animation-duration: 28s;
+    animation-delay: -5s;
+}
+
+@keyframes floatBlob {
+    0% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(8%, 12%) scale(1.08); }
+    100% { transform: translate(-4%, -4%) scale(0.96); }
+}
+
+/* --- Call Waiter Floating Button --- */
+.waiter-fab {
+    position: fixed;
+    right: 20px;
+    bottom: 95px; /* Above the cart FAB */
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid var(--glass-border);
+    color: var(--primary-orange);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    box-shadow: var(--shadow-md);
+    z-index: 999;
+    cursor: pointer;
+    transition: all var(--duration-fast) var(--ease-out-back);
+    animation: bounceIn 0.8s var(--ease-out-back) 0.5s both;
+    pointer-events: auto !important;
+}
+.waiter-fab:hover {
+    transform: scale(1.1) translateY(-2px);
+    border-color: var(--primary-orange);
+    box-shadow: var(--shadow-glow);
+}
+.waiter-fab:active {
+    transform: scale(0.9);
+}
+
+@keyframes bounceIn {
+    from { opacity: 0; transform: scale(0.3); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* --- Bottom Sheet Modal --- */
+.bottom-sheet {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border-top: 1px solid var(--glass-border);
+    border-radius: 24px 24px 0 0;
+    z-index: 2000;
+    transform: translateY(100%);
+    transition: transform 0.4s var(--ease-out-expo);
+    padding: 24px;
+    padding-bottom: calc(24px + var(--safe-bottom));
+    box-shadow: var(--shadow-lg);
+}
+.bottom-sheet.active {
+    transform: translateY(0);
+}
+
+.bottom-sheet-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    z-index: 1999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+.bottom-sheet-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.bottom-sheet-handle {
+    width: 40px;
+    height: 5px;
+    background: var(--border-color-hover);
+    border-radius: 10px;
+    margin: 0 auto 20px;
+}
+
+.bottom-sheet h2 {
+    font-size: 18px;
+    font-weight: 800;
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+.bottom-sheet p {
+    font-size: 13px;
+    color: var(--text-muted);
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.waiter-options {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.waiter-option-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-soft);
+    padding: 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: all var(--duration-fast) ease;
+}
+.waiter-option-card:active {
+    transform: scale(0.96);
+    border-color: var(--primary-orange);
+    background: rgba(255, 107, 0, 0.05);
+}
+.waiter-option-card .option-icon {
+    font-size: 26px;
+    margin-bottom: 8px;
+    display: block;
+}
+.waiter-option-card .option-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+/* --- Slide to Pay Widget --- */
+.slide-pay-container {
+    position: relative;
+    width: 100%;
+    height: 56px;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 28px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.slide-pay-text {
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    color: var(--text-secondary);
+    user-select: none;
+    pointer-events: none;
+    z-index: 1;
+    animation: shimmerText 2s infinite linear;
+}
+
+@keyframes shimmerText {
+    0% { opacity: 0.5; }
+    50% { opacity: 1; }
+    100% { opacity: 0.5; }
+}
+
+.slide-pay-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 56px;
+    background: var(--primary-orange);
+    border-radius: 28px;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 6px;
+}
+
+.slide-pay-handle {
+    width: 44px;
+    height: 44px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-orange);
+    font-size: 18px;
+    cursor: grab;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    user-select: none;
+    z-index: 3;
+}
+.slide-pay-handle:active {
+    cursor: grabbing;
+}
+
+/* --- Split Bill Widget --- */
+.split-bill-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-soft);
+    padding: 16px;
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.split-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.split-title {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.split-selector {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+}
+
+.split-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--border-color);
+    color: var(--text-main);
+    font-size: 18px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.split-btn:active {
+    transform: scale(0.9);
+    background: var(--primary-orange);
+    color: white;
+}
+
+.split-count {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--primary-orange);
+    min-width: 30px;
+    text-align: center;
+}
+
+.split-result {
+    border-top: 1px dashed var(--border-color);
+    padding-top: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.split-result-text {
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+.split-result-value {
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--text-main);
+}
+
+/* --- Language Switcher --- */
+.lang-selector {
+    display: flex;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
+    padding: 2px;
+    border-radius: var(--border-radius-pill);
+    gap: 2px;
+    align-items: center;
+    height: 28px;
+    flex-shrink: 0;
+}
+.lang-pill {
+    font-size: 10px;
+    font-weight: 900;
+    padding: 4px 8px;
+    border-radius: var(--border-radius-pill);
+    cursor: pointer;
+    transition: all var(--duration-fast) ease;
+    color: var(--text-muted);
+    user-select: none;
+    line-height: 1;
+}
+.lang-pill.active {
+    background: var(--primary-orange);
+    color: #FFFFFF;
+    box-shadow: 0 2px 8px rgba(224, 83, 0, 0.25);
+}
+
+/* --- Cyber Grid Background Overlay --- */
+.cyber-grid {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    background-size: 40px 40px;
+    background-image: 
+        linear-gradient(to right, rgba(31, 18, 10, 0.015) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(31, 18, 10, 0.015) 1px, transparent 1px);
+    pointer-events: none;
+}

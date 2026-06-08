@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Taplito - Narudžba #12345</title>
+    <!-- Global Design System -->
+    <link rel="stylesheet" href="../../global.css">
+    <!-- Component Specific Styles -->
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Override .page-header margin-right since we have no search icon */
+        .page-header h1 { margin-right: 0; }
+    </style>
+    <script src="../../translations.js"></script>
+</head>
+<body>
+
+    <!-- Ambient Background Blobs -->
+    <div class="ambient-bg">
+        <div class="ambient-blob ambient-blob-1"></div>
+        <div class="ambient-blob ambient-blob-2"></div>
+    </div>
+    <div class="cyber-grid"></div>
+
+    <header class="page-header">
+        <a href="../06-orders-list-screen/index.html" class="back-btn" aria-label="Natrag">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        </a>
+        <h1 data-i18n="order_id_title">Narudžba #12345</h1>
+        <!-- Language Selector -->
+        <div class="lang-selector" style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%);">
+            <span class="lang-pill active" data-lang="hr">HR</span>
+            <span class="lang-pill" data-lang="en">EN</span>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Live Tracker -->
+        <section>
+            <span class="section-label" data-i18n="order_tracking">Praćenje narudžbe</span>
+            <div class="tracker-container">
+                <div class="tracker-track">
+                    <div class="tracker-line">
+                        <div class="tracker-line-progress"></div>
+                    </div>
+                    
+                    <div class="tracker-step completed">
+                        <div class="step-dot"></div>
+                        <span class="step-label" data-i18n="status_received">Primljeno</span>
+                    </div>
+                    
+                    <div class="tracker-step active">
+                        <div class="step-dot"></div>
+                        <span class="step-label" data-i18n="status_prep">U pripremi</span>
+                    </div>
+                    
+                    <div class="tracker-step">
+                        <div class="step-dot"></div>
+                        <span class="step-label" data-i18n="status_served">Posluženo</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Items -->
+        <section>
+            <span class="section-label" data-i18n="order_items">Stavke</span>
+            <div class="detail-box">
+                <div class="row">
+                    <span data-i18n="item_burger_qty">Gourmet Burger × 1</span>
+                    <span>9.40€</span>
+                </div>
+                <span class="modifier" data-i18n="mod_burger_extra">Bez luka, Extra Bacon</span>
+                
+                <div class="row" style="margin-top: 10px;">
+                    <span data-i18n="item_cappuccino_qty">Cappuccino × 1</span>
+                    <span>2.20€</span>
+                </div>
+                <span class="modifier" data-i18n="cart_mod_cappuccino">Zobeno mlijeko</span>
+            </div>
+        </section>
+
+        <!-- Billing -->
+        <section>
+            <span class="section-label" data-i18n="billing">Obračun</span>
+            <div class="detail-box">
+                <div class="row">
+                    <span data-i18n="subtotal">Međuzbir</span>
+                    <span>11.60€</span>
+                </div>
+                <div class="row">
+                    <span data-i18n="extras">Dodaci</span>
+                    <span>3.40€</span>
+                </div>
+                <div class="row">
+                    <span data-i18n="tip_15">Napojnica (15%)</span>
+                    <span>2.25€</span>
+                </div>
+                <div class="row main">
+                    <span data-i18n="total_paid">Ukupno plaćeno</span>
+                    <span style="color: var(--primary-orange);">17.25€</span>
+                </div>
+                
+                <div style="margin-top: 20px; font-size: 12px; color: var(--text-muted);">
+                    <div class="row" style="padding: 4px 0;">
+                        <span data-i18n="pay_method">Način plaćanja</span>
+                        <span>Visa ●●●● 4242</span>
+                    </div>
+                    <div class="row" style="padding: 4px 0;">
+                        <span data-i18n="date_label">Datum</span>
+                        <span>10.05.2026 21:20</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Merchant Info -->
+        <section>
+            <span class="section-label" data-i18n="merchant_info">Podaci o lokalu</span>
+            <div style="font-size: 14px; line-height: 1.6;">
+                <div style="font-weight: 700;">THE BULLORDS d.o.o.</div>
+                <div style="color: var(--text-muted);">Jakovlje, Toplička cesta 9B</div>
+                <a href="#" class="map-btn">
+                    <span data-i18n="open_map">Otvori na karti</span> 🗺️
+                </a>
+            </div>
+        </section>
+
+        <!-- Footer Actions -->
+        <footer class="detail-footer">
+            <a href="#" class="order-again-btn" data-i18n="reorder_btn">Naruči ponovno</a>
+            <a href="#" class="pdf-link">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                <span data-i18n="download_pdf">Preuzmi PDF račun</span>
+            </a>
+        </footer>
+    </main>
+
+    <!-- Floating Waiter Button (HIDDEN) -->
+    <!--
+    <button class="waiter-fab" id="waiterBtn" aria-label="Pozovi konobara">🛎️</button>
+    -->
+
+    <!-- Waiter Bottom Sheet (HIDDEN) -->
+    <!--
+    <div class="bottom-sheet-overlay" id="waiterOverlay"></div>
+    <div class="bottom-sheet" id="waiterSheet">
+        <div class="bottom-sheet-handle"></div>
+        <h2 data-i18n="waiter_title">🛎️ Usluga za stolom</h2>
+        <p data-i18n="waiter_desc">Odaberite što trebate i konobar stiže za Vaš stol (Stol 12).</p>
+        <div class="waiter-options">
+            <div class="waiter-option-card" data-action="Pozovi konobara">
+                <span class="option-icon">🛎️</span>
+                <span class="option-title" data-i18n="waiter_call">Pozovi konobara</span>
+            </div>
+            <div class="waiter-option-card" data-action="Donesi račun (kartica)">
+                <span class="option-icon">💳</span>
+                <span class="option-title" data-i18n="waiter_bill_card">Donesi račun (kartica)</span>
+            </div>
+            <div class="waiter-option-card" data-action="Donesi račun (gotovina)">
+                <span class="option-icon">💵</span>
+                <span class="option-title" data-i18n="waiter_bill_cash">Donesi račun (gotovina)</span>
+            </div>
+            <div class="waiter-option-card" data-action="Ponovi zadnju rundu">
+                <span class="option-icon">🔁</span>
+                <span class="option-title" data-i18n="waiter_repeat">Ponovi rundu</span>
+            </div>
+        </div>
+    </div>
+    -->
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Waiter Bottom Sheet Logic (HIDDEN)
+            /*
+            const waiterBtn = document.getElementById('waiterBtn');
+            const waiterSheet = document.getElementById('waiterSheet');
+            const waiterOverlay = document.getElementById('waiterOverlay');
+
+            if(waiterBtn) {
+                waiterBtn.addEventListener('click', () => {
+                    waiterSheet.classList.add('active');
+                    waiterOverlay.classList.add('active');
+                });
+
+                const closeWaiter = () => {
+                    waiterSheet.classList.remove('active');
+                    waiterOverlay.classList.remove('active');
+                };
+
+                waiterOverlay.addEventListener('click', closeWaiter);
+
+                document.querySelectorAll('.waiter-option-card').forEach(card => {
+                    card.addEventListener('click', function() {
+                        const action = this.getAttribute('data-action');
+                        closeWaiter();
+                        
+                        const toast = document.createElement('div');
+                        toast.className = 'toast';
+                        const prefix = getTranslation('waiter_sent');
+                        toast.textContent = `${prefix}"${action}"`;
+                        document.body.appendChild(toast);
+                        setTimeout(() => toast.remove(), 2800);
+                    });
+                });
+            }
+            */
+        });
+    </script>
+</body>
+</html>

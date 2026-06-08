@@ -1,0 +1,108 @@
+/* Success Screen — Component Styles
+   Shared: .btn-primary from global.css
+   ========================================================================== */
+
+.success-container {
+    height: 100vh;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 40px;
+    position: relative;
+    z-index: 1;
+}
+
+.checkmark-wrapper {
+    width: 80px;
+    height: 80px;
+    background: var(--primary-orange);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+    animation: scaleUp 0.6s var(--ease-out-back);
+    box-shadow: 0 10px 30px rgba(239, 105, 30, 0.4);
+}
+
+.checkmark-wrapper svg {
+    width: 40px;
+    height: 40px;
+}
+
+.checkmark-path {
+    stroke-dasharray: 100;
+    stroke-dashoffset: 100;
+    animation: drawCheck 0.6s ease forwards 0.4s;
+}
+
+@keyframes drawCheck {
+    to { stroke-dashoffset: 0; }
+}
+
+.success-container h1 {
+    font-size: 26px;
+    font-weight: 900;
+    margin-bottom: 15px;
+    animation: fadeInUp 0.5s var(--ease-out-expo) 0.5s both;
+    color: var(--text-main);
+}
+
+.success-container > p {
+    color: var(--text-muted);
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    animation: fadeInUp 0.5s var(--ease-out-expo) 0.6s both;
+}
+
+.order-id-chip {
+    display: inline-block;
+    padding: 10px 20px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid var(--glass-border);
+    border-radius: var(--border-radius-pill);
+    font-weight: 700;
+    font-size: 14px;
+    margin-bottom: 15px;
+    animation: fadeInUp 0.5s var(--ease-out-expo) 0.7s both;
+    color: var(--text-main);
+}
+
+.email-info {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 40px;
+    animation: fadeInUp 0.5s var(--ease-out-expo) 0.75s both;
+}
+
+.actions {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    animation: fadeInUp 0.5s var(--ease-out-expo) 0.8s both;
+}
+
+/* Override .btn-primary to add extra spacing for icon */
+.actions .btn-primary.track-btn {
+    justify-content: space-between;
+}
+
+.back-to-menu {
+    color: var(--text-muted);
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: color var(--duration-fast) ease;
+}
+
+.back-to-menu:hover {
+    color: var(--text-main);
+}
